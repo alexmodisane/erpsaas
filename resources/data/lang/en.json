@@ -229,5 +229,9 @@
     "Resources": "Resources",
     "Finance": "Finance",
     "Personalization": "Personalization",
-    "Company": "Company"
+    "Company": "Company",
+    "Address": "Address",
+    "City": "City",
+    "State": "State",
+    "Zip Code": "Zip Code"
 }
