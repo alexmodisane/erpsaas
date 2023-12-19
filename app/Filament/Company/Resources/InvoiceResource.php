@@ -4,6 +4,7 @@ namespace App\Filament\Company\Resources;
 
 use App\Filament\Company\Resources\InvoiceResource\Pages;
 use App\Filament\Company\Resources\InvoiceResource\RelationManagers;
+use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Items;
 use Filament\Forms;
@@ -33,19 +34,28 @@ class InvoiceResource extends Resource
                     Forms\Components\DatePicker::make('invoice_date')
                             ->default(now())
                             ->required(),
+                    forms\Components\Select::make('customer_id')
+                            ->label('Customer')
+                            ->placeholder('Select Customer')
+                            ->options(Customer::query()->pluck('company_name', 'id'))
+                            ->reactive()
+                            ->searchable()
+                            ->required(),
 
                     // Invoice items repeater
                     Repeater::make('InvoiceItems')
                         ->schema([
                             Forms\Components\Select::make('item_id')
                                 ->label('Item/Service')
+                                ->placeholder('Select an item')
                                 ->options(Items::query()->pluck('description', 'id'))
                                 ->reactive()
+                                ->searchable()
                                 ->callAfterStateUpdated(function ($state, callable $set) {
                                     $item = Items::find($state);
                                     if ($item) {
                                         $set('price', number_format($item->price / 100, 2));
-                                        $set('item_price', $item->price);
+                                        $set('item_price', $item->item_price);
                                     }
                                 })
                                 ->columnSpan([

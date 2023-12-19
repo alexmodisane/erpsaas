@@ -17,6 +17,7 @@ class Invoice extends Model
     protected $fillable = [
         'company_id',
         'user_id',
+        'customer_id',
         'invoice_date',
         'invoice_number',
     ];
@@ -29,6 +30,11 @@ class Invoice extends Model
     public function user(): BelongsTo 
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function customer(): BelongsTo 
+    {
+        return $this->belongsTo(Customer::class);
     }
 
     public function invoiceItems(): HasMany
