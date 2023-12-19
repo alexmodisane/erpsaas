@@ -13,17 +13,27 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
 class ItemsResource extends Resource
 {
     protected static ?string $model = Items::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-gift-top';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('sku')->required(),
+                Forms\Components\Textarea::make('description')->required(),
+                Forms\Components\TextInput::make('brand_name')->required(),
+                //Forms\Components\Select::make('status')
+                                    //->options([
+                                        //'in-stock' => 'In-Stock',
+                                        //'out-of-stock' => 'Out-of-Stock',
+                                    //]),
+                Forms\Components\TextInput::make('item_price')->required(),
+                Forms\Components\TextInput::make('item_amount')->required(),
             ]);
     }
 

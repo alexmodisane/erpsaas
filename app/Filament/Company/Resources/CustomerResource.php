@@ -24,7 +24,7 @@ class CustomerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('first_name')->required(),
-                Forms\Components\TextInput::make('last_name')->email()->required(),
+                Forms\Components\TextInput::make('last_name')->required(),
                 Forms\Components\TextInput::make('company_name')->required(),
                 Forms\Components\TextInput::make('customer_email')->email()->required(),
                 Forms\Components\TextInput::make('customer_work_phone')->required(),
@@ -48,7 +48,7 @@ class CustomerResource extends Resource
                                             ->localizeLabel()
                                             ->maxLength(20),
                                     ])->columns(),
-                    ])
+                    ])->columnSpan('full')
             ]);
     }
 
